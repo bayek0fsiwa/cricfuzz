@@ -1,6 +1,5 @@
 import Layout from './components/Layout'
 import Card from './components/Card'
-import './App.css';
 import { Container } from '@material-ui/core';
 
 function App() {
