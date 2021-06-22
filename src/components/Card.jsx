@@ -8,7 +8,8 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    minWidth: 250,
+    // maxWidth: 500,
     margin: 275,
   },
   bullet: {
@@ -47,7 +48,7 @@ export default function SimpleCard() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button variant="contained" color="primary">See More</Button>
       </CardActions>
     </Card>
   );
