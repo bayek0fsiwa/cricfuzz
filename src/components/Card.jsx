@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import axios from 'axios';
+// eslint-disable-next-line
+// import crickFuzz from '../api/crickFuzz';
+
+
 
 const useStyles = makeStyles({
   root: {
@@ -26,6 +31,24 @@ const useStyles = makeStyles({
 });
 
 export default function SimpleCard() {
+  const matchUrl = "https://www.cricbuzz.com/live-cricket-scores/35607/ind-vs-nz-final-icc-world-test-championship-final-2021";
+  const baseUrl = "https://cricket-api.vercel.app/cri.php?url=" + matchUrl;
+  const [score, setscore] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(baseUrl)
+      console.log(result);
+      setscore(result.data.livescore)
+    }
+    fetchData();
+  }, [])
+
+  // const renderScore = () => {
+  //   return livescore.map(el => {
+  //     const title = el.title;
+  //   })
+  // }
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
@@ -33,7 +56,7 @@ export default function SimpleCard() {
     <Card className={classes.root}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Word of the Day
+          Render title Here
         </Typography>
         <Typography variant="h5" component="h2">
           be{bull}nev{bull}o{bull}lent
