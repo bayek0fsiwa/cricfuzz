@@ -6,10 +6,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
-// eslint-disable-next-line
-// import crickFuzz from '../api/crickFuzz';
-
-
 
 const useStyles = makeStyles({
   root: {
@@ -30,44 +26,42 @@ const useStyles = makeStyles({
   },
 });
 
+const matchUrl = "https://www.cricbuzz.com/live-cricket-scores/35607/ind-vs-nz-final-icc-world-test-championship-final-2021";
+const baseUrl = "https://cricket-api.vercel.app/cri.php?url=" + matchUrl;
+
 export default function SimpleCard() {
-  const matchUrl = "https://www.cricbuzz.com/live-cricket-scores/35607/ind-vs-nz-final-icc-world-test-championship-final-2021";
-  const baseUrl = "https://cricket-api.vercel.app/cri.php?url=" + matchUrl;
   const [score, setscore] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(baseUrl)
-      console.log(result);
+      // console.log(result.data.livescore);
       setscore(result.data.livescore)
     }
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // const renderScore = () => {
-  //   return livescore.map(el => {
-  //     const title = el.title;
-  //   })
-  // }
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
+  // const bull = <span className={classes.bullet}>•</span>;
 
   return (
     <Card className={classes.root}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Render title Here
+          {score.title}
         </Typography>
         <Typography variant="h5" component="h2">
-          be{bull}nev{bull}o{bull}lent
+          {score.teamone}
+        </Typography>
+        <Typography variant="h5" component="h2">
+          {score.teamtwo}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          adjective
+          {score.update}
         </Typography>
         <Typography variant="body2" component="p">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
+          {score.runrate}
         </Typography>
       </CardContent>
       <CardActions>
